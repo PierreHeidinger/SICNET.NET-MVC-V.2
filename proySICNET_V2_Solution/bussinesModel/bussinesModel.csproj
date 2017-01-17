@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clienteBussines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dataModels\dataModels.csproj">
+      <Project>{acaace61-b385-4833-96a6-3b954901397f}</Project>
+      <Name>dataModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\entityModels\entityModels.csproj">
+      <Project>{da06015e-a047-4522-8c64-a6a24b1c3c58}</Project>
+      <Name>entityModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

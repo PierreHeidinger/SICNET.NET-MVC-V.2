@@ -1,0 +1,169 @@
+﻿@model IEnumerable<entityModels.cliente>
+
+@{
+    ViewBag.Title = "Clientes";
+}
+
+
+
+
+
+
+        <!-- Encabezado inicio-->
+        
+             <div class="row">
+                
+              
+                     <div class="col-md-12">
+                         <button class="btn btn-primary">INICIO</button>
+                         <button class="btn btn-primary">INICIO</button>
+                     </div>
+
+                 @using (Html.BeginForm()) { 
+
+                     <!--Filtros de Busqueda-->
+                     <div class="col-md-2">                         
+                         <input class="form-control" placeholder="Codigo..." name="v_CODIGO"  value="@ViewBag.v_CODIGO" />               
+                     </div>
+
+                     <div class="col-md-2">
+                         <input class="form-control" placeholder="Cliente..." name="v_CLIENTE" value="@ViewBag.v_CLIENTE" />
+                     </div>
+
+                     <div class="col-md-2">
+                         <input class="form-control" placeholder="Codigo..." />
+                     </div>
+
+                     <div class="col-md-2">
+                         <input class="form-control" placeholder="Codigo..." />
+                     </div>
+
+                     <div class="col-md-2">
+                         <input class="form-control" placeholder="Codigo..." />
+                     </div>
+
+                     <div class="btn-fill pull-right">    
+                        <div class="col-md-2" style="vertical-align:top">                    
+                         <input class="btn btn-success" type="submit" value="BUSCAR" />
+                        </div>
+                     </div>
+                 }
+                 
+            </div>
+                       
+        <!-- Encabezado fin-->
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                   
+                    <div class="card-body">
+                       
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;text-align:center">
+                                        @Html.DisplayNameFor(model => model.codigo)
+                                    </th>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;">
+                                        @Html.DisplayNameFor(model => model.documento)
+                                    </th>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;">
+                                        @Html.DisplayNameFor(model => model.tipo_documento_descripcion)
+                                    </th>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;">
+                                        @Html.DisplayNameFor(model => model.nombres)
+                                    </th>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;">
+                                        @Html.DisplayNameFor(model => model.apellido_paterno)
+                                    </th>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;">
+                                        @Html.DisplayNameFor(model => model.apellido_materno)
+                                    </th>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;text-align:center">
+                                        @Html.DisplayNameFor(model => model.fecha_registro)
+                                    </th>
+                                    <th style="background-color:#1ABC9C;color:whitesmoke;text-align:center">
+                                        Opciones
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="background-color:#9abcc3;text-align:center">
+                                            @Html.DisplayFor(modelItem => item.codigo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.documento)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tipo_documento_descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nombres)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.apellido_paterno)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.apellido_materno)
+                                        </td>
+                                        <td style="text-align:center">
+                                            @Html.DisplayFor(modelItem => item.fecha_registro)
+                                        </td>
+                                        <td style="text-align:center">
+                                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+        

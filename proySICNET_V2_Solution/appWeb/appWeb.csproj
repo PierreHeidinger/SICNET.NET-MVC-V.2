@@ -193,6 +193,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,6 +202,77 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\arquitect\dist\css\style.css" />
+    <Content Include="Content\arquitect\dist\css\themes.css" />
+    <Content Include="Content\arquitect\dist\css\themes\flat-blue.css" />
+    <Content Include="Content\arquitect\dist\css\themes\flat-green.css" />
+    <Content Include="Content\arquitect\dist\html\components\chartjs.html" />
+    <Content Include="Content\arquitect\dist\html\components\pricing-table.html" />
+    <Content Include="Content\arquitect\dist\html\form\ui-kits.html" />
+    <Content Include="Content\arquitect\dist\html\icons\font-awesome.html" />
+    <Content Include="Content\arquitect\dist\html\icons\glyphicons.html" />
+    <Content Include="Content\arquitect\dist\html\index.html" />
+    <Content Include="Content\arquitect\dist\html\license.html" />
+    <Content Include="Content\arquitect\dist\html\pages\index.html" />
+    <Content Include="Content\arquitect\dist\html\pages\login.html" />
+    <Content Include="Content\arquitect\dist\html\table\datatable.html" />
+    <Content Include="Content\arquitect\dist\html\table\table.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\alert.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\button.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\card.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\grid.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\list.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\loader.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\modal.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\other.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\panel.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\step.html" />
+    <Content Include="Content\arquitect\dist\html\ui-kits\theming.html" />
+    <Content Include="Content\arquitect\dist\img\app-header-bg.jpg" />
+    <Content Include="Content\arquitect\dist\img\backdrop\micro_carbon.png" />
+    <Content Include="Content\arquitect\dist\img\backdrop\tactile_noise.png" />
+    <Content Include="Content\arquitect\dist\img\bg.jpg" />
+    <Content Include="Content\arquitect\dist\img\bg\picjumbo.com_HNCK3558.jpg" />
+    <Content Include="Content\arquitect\dist\img\contact-us-bg.jpg" />
+    <Content Include="Content\arquitect\dist\img\profile\picjumbo.com_HNCK4153_resize.jpg" />
+    <Content Include="Content\arquitect\dist\img\profile\profile-1.jpg" />
+    <Content Include="Content\arquitect\dist\img\screenshots\dashboard.png" />
+    <Content Include="Content\arquitect\dist\img\screenshots\landing.png" />
+    <Content Include="Content\arquitect\dist\img\screenshots\login.png" />
+    <Content Include="Content\arquitect\dist\img\screenshots\theming.png" />
+    <Content Include="Content\arquitect\dist\img\thumbnails\picjumbo.com_HNCK4737.jpg" />
+    <Content Include="Content\arquitect\dist\img\thumbnails\picjumbo.com_IMG_3241.jpg" />
+    <Content Include="Content\arquitect\dist\img\thumbnails\picjumbo.com_IMG_4566.jpg" />
+    <Content Include="Content\arquitect\dist\js\alert.js" />
+    <Content Include="Content\arquitect\dist\js\app.js" />
+    <Content Include="Content\arquitect\dist\js\button.js" />
+    <Content Include="Content\arquitect\dist\js\card.js" />
+    <Content Include="Content\arquitect\dist\js\chartjs.js" />
+    <Content Include="Content\arquitect\dist\js\index.js" />
+    <Content Include="Content\arquitect\dist\js\list.js" />
+    <Content Include="Content\arquitect\dist\js\modal.js" />
+    <Content Include="Content\arquitect\dist\js\theming.js" />
+    <Content Include="Content\arquitect\dist\lib\css\animate.min.css" />
+    <Content Include="Content\arquitect\dist\lib\css\bootstrap-switch.min.css" />
+    <Content Include="Content\arquitect\dist\lib\css\bootstrap.min.css" />
+    <Content Include="Content\arquitect\dist\lib\css\checkbox3.min.css" />
+    <Content Include="Content\arquitect\dist\lib\css\dataTables.bootstrap.css" />
+    <Content Include="Content\arquitect\dist\lib\css\font-awesome.min.css" />
+    <Content Include="Content\arquitect\dist\lib\css\jquery.dataTables.min.css" />
+    <Content Include="Content\arquitect\dist\lib\css\select2.min.css" />
+    <Content Include="Content\arquitect\dist\lib\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\arquitect\dist\lib\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\arquitect\dist\lib\js\ace\ace.js" />
+    <Content Include="Content\arquitect\dist\lib\js\ace\mode-html.js" />
+    <Content Include="Content\arquitect\dist\lib\js\ace\theme-github.js" />
+    <Content Include="Content\arquitect\dist\lib\js\bootstrap-switch.min.js" />
+    <Content Include="Content\arquitect\dist\lib\js\bootstrap.min.js" />
+    <Content Include="Content\arquitect\dist\lib\js\Chart.min.js" />
+    <Content Include="Content\arquitect\dist\lib\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\arquitect\dist\lib\js\jquery.dataTables.min.js" />
+    <Content Include="Content\arquitect\dist\lib\js\jquery.matchHeight-min.js" />
+    <Content Include="Content\arquitect\dist\lib\js\jquery.min.js" />
+    <Content Include="Content\arquitect\dist\lib\js\select2.full.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -212,6 +285,16 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\arquitect\dist\.DS_Store" />
+    <Content Include="Content\arquitect\dist\lib\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\arquitect\dist\lib\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\arquitect\dist\lib\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\arquitect\dist\lib\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\arquitect\dist\lib\fonts\FontAwesome.otf" />
+    <Content Include="Content\arquitect\dist\lib\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\arquitect\dist\lib\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\arquitect\dist\lib\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\arquitect\dist\lib\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -237,10 +320,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Clientes\Clientes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +334,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\bussinesModel\bussinesModel.csproj">
+      <Project>{23f3eb74-3494-4f39-8b4a-0125fda8fb4e}</Project>
+      <Name>bussinesModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\entityModels\entityModels.csproj">
+      <Project>{da06015e-a047-4522-8c64-a6a24b1c3c58}</Project>
+      <Name>entityModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
