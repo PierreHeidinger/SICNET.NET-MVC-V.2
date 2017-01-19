@@ -7,11 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace entityModels
 {
-    public class cliente
+    public class Cliente
     {
         [Display(Name = "Codigo")]
         public string codigo { get; set; }
         [Display(Name = "Documento")]
+        [Required(ErrorMessage ="Ingrese el Nª de Documentos !")]
         public string documento { get; set; }
         [Display(Name = "Codigo Documento")]
         public string tipo_documento { get; set; }
@@ -38,13 +39,13 @@ namespace entityModels
 
 
         //Constructor vacio
-        public cliente()
+        public Cliente()
         {
 
         }
 
 
-        public cliente(string codigo, string documento,string tipo_documento ,string nombres, string apellido_paterno, string apellido_materno, DateTime fecha_nacimiento, DateTime fecha_registro, int departamento, int distrito, int provincia, string direccion,string tipo_documento_descripcion)
+        public Cliente(string codigo, string documento,string tipo_documento ,string nombres, string apellido_paterno, string apellido_materno, DateTime fecha_nacimiento, DateTime fecha_registro, int departamento, int distrito, int provincia, string direccion)
         {
             this.codigo = codigo;
             this.documento = documento;
@@ -58,7 +59,9 @@ namespace entityModels
             this.distrito = distrito;
             this.provincia = provincia;
             this.direccion = direccion;
-            this.tipo_documento_descripcion = tipo_documento_descripcion;
+            this.tipo_documento_descripcion = (this.tipo_documento == "1") ? "DNI" : "RUC";
+
+
         }
 
     }

@@ -6,17 +6,42 @@ using System.Web.Mvc;
 using entityModels;
 using bussinesModel;
 
+
 namespace appWeb.Controllers
 {
     public class ClientesController : Controller
     {
 
-        clienteBussines obj_cliente = new clienteBussines();
+        #region "DECLARACIONES"
+
+        clienteBussines obj_cliente      = new clienteBussines();
+        utilitariosBussines obj_utilitarios  = new utilitariosBussines();
+
+        #endregion
+
+
+        #region "PROCEDIMIENTOS"
+
+
+        private void setear_departamentos()
+        {
+            var departamentos = new SelectList(obj_utilitarios.FPub_ListaDepartamentos(), "Id_departamento", "Departamento_descripcion");
+            ViewBag.departamentos = departamentos;
+        }
+
+        public JsonResult GetDepartamentos()
+        {
+            var departamentos = obj_utilitarios.FPub_ListaDepartamentos();
+            return this.Json(departamentos, JsonRequestBehavior.AllowGet);
+        }
+        
+
+        #endregion
 
         // GET: Clientes
         public ActionResult Clientes()
         {
-            var res = from c in obj_cliente.FPub_Listar_Clientes("vacio","vacio") select c;
+            var res = from c in obj_cliente.FPub_Listar_Clientes(string.Empty,string.Empty) select c;
 
             return View(res.ToList());
         }
@@ -24,8 +49,6 @@ namespace appWeb.Controllers
        [HttpPost]
        public ActionResult Clientes(string v_CODIGO,string v_CLIENTE)
         {
-            ViewBag.v_CODIGO  = v_CODIGO;
-            ViewBag.v_CLIENTE = v_CLIENTE;
 
             var res = from c in obj_cliente.FPub_Listar_Clientes(v_CODIGO, v_CLIENTE) select c;
 
@@ -34,14 +57,34 @@ namespace appWeb.Controllers
 
 
         // GET: Clientes/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Cliente_detalle(int codigo)
         {
+            setear_departamentos();
+
+            if (ModelState.IsValid)
+            {
+                var cliente = obj_cliente.FPub_DetalleCliente(codigo.ToString());
+                
+                return View(cliente);
+            }
+
             return View();
         }
 
         // GET: Clientes/Create
-        public ActionResult Create()
+        public ActionResult Cliente_agregar(int? codigo)
         {
+            setear_departamentos();
+
+            if (codigo != null)
+            {
+                var cliente = obj_cliente.FPub_DetalleCliente(codigo.ToString());
+
+                return View(cliente);
+            }                      
+            
+          
+
             return View();
         }
 

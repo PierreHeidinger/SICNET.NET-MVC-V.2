@@ -16,16 +16,16 @@ namespace dataModels
         conexionBD cn = new conexionBD();
 
 
-        #region "Funcion Listado Clientes"
+        #region "Funcion Listado Cab"
         
-        public List<cliente> FPub_ListadoClientes(String v_CODIGO, String v_CLIENTE)
+        public List<Cliente> FPub_ListadoClientes(String v_CODIGO, String v_CLIENTE)
         {
             return FPriv_ListadoClientes( v_CODIGO,  v_CLIENTE);
         }
 
-        private List<cliente> FPriv_ListadoClientes(String v_CODIGO,String v_CLIENTE)
+        private List<Cliente> FPriv_ListadoClientes(String v_CODIGO,String v_CLIENTE)
         {
-            List<cliente> clientes = new List<cliente>();
+            List<Cliente> clientes = new List<Cliente>();
 
             cn.getCn.Open();
 
@@ -41,9 +41,9 @@ namespace dataModels
             {
                 while (read.Read()) { 
 
-                    cliente Cliente = new cliente(Convert.ToString(read["CODIGO"]),(string)read["DOCUMENTO"], (string)read["TIPO_DOCUMENTO"], (string)read["NOMBRES"],(string)read["APELLIDO_PATERNO"],
+                    Cliente Cliente = new Cliente(Convert.ToString(read["CODIGO"]),(string)read["DOCUMENTO"], (string)read["TIPO_DOCUMENTO"], (string)read["NOMBRES"],(string)read["APELLIDO_PATERNO"],
                                                   (string)read["APELLIDO_MATERNO"],(DateTime)read["FECHA_NACIMIENTO"],(DateTime)read["FECHA_REGISTRO"],
-                                                   (int)read["DEPARTAMENTO"],(int)read["DISTRITO"],(int)read["PROVINCIA"],(string)read["DIRECCION"], (string)read["TIPO_DOCUMENTO_DESCRIPCION"]);
+                                                   (int)read["DEPARTAMENTO"],(int)read["DISTRITO"],(int)read["PROVINCIA"],(string)read["DIRECCION"]);
 
                     clientes.Add(Cliente);  
                 }
@@ -54,8 +54,43 @@ namespace dataModels
             return clientes;
 
         }
-        
+
         #endregion
 
+        #region "Funcion Mostrar Detalle"
+
+
+        public Cliente FPub_DetalleCliente(string v_CODIGO)
+        {
+            return FPriv_DetalleCliente(v_CODIGO);
+        }
+
+
+        private Cliente FPriv_DetalleCliente(string v_CODIGO)
+        {
+
+            Cliente cliente = null;
+
+            cn.getCn.Open();
+            SqlCommand cmd = new SqlCommand("SP_CLIENTE_DETALLE_CAB", cn.getCn);
+            cmd.Parameters.AddWithValue("@CODIGO", v_CODIGO);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            using (var read = cmd.ExecuteReader())
+            {
+                while (read.Read())
+                {
+                    cliente = new Cliente(Convert.ToString(read["CODIGO"]), (string)read["DOCUMENTO"], (string)read["TIPO_DOCUMENTO"], (string)read["NOMBRES"], (string)read["APELLIDO_PATERNO"],
+                                                  (string)read["APELLIDO_MATERNO"], (DateTime)read["FECHA_NACIMIENTO"], (DateTime)read["FECHA_REGISTRO"],
+                                                   (int)read["DEPARTAMENTO"], (int)read["DISTRITO"], (int)read["PROVINCIA"], (string)read["DIRECCION"]);
+                }
+            }
+
+
+            return cliente;
+
+        }
+
+        #endregion
     }
 }

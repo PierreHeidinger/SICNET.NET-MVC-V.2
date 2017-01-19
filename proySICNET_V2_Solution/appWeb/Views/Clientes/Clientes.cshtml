@@ -1,4 +1,4 @@
-﻿@model IEnumerable<entityModels.cliente>
+﻿@model IEnumerable<entityModels.Cliente>
 
 @{
     ViewBag.Title = "Clientes";
@@ -15,19 +15,20 @@
                 
               
                      <div class="col-md-12">
-                         <button class="btn btn-primary">INICIO</button>
-                         <button class="btn btn-primary">INICIO</button>
+                         
+                          @Html.ActionLink("AGREGAR CLIENTE", "Cliente_agregar",new { }, new { @class="btn btn-primary" })
+                         
                      </div>
 
                  @using (Html.BeginForm()) { 
 
                      <!--Filtros de Busqueda-->
                      <div class="col-md-2">                         
-                         <input class="form-control" placeholder="Codigo..." name="v_CODIGO"  value="@ViewBag.v_CODIGO" />               
+                         <input class="form-control" placeholder="Codigo..." name="v_CODIGO"  value="@string.Empty" />               
                      </div>
 
                      <div class="col-md-2">
-                         <input class="form-control" placeholder="Cliente..." name="v_CLIENTE" value="@ViewBag.v_CLIENTE" />
+                         <input class="form-control" placeholder="Cliente..." name="v_CLIENTE" value="@string.Empty" />
                      </div>
 
                      <div class="col-md-2">
@@ -113,8 +114,8 @@
                                             @Html.DisplayFor(modelItem => item.fecha_registro)
                                         </td>
                                         <td style="text-align:center">
-                                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.codigo }) |
+                                            @Html.ActionLink("Detalle", "Cliente_detalle", new {  codigo =item.codigo  }) |
                                             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                         </td>
                                     </tr>

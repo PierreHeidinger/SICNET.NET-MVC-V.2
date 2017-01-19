@@ -43,6 +43,7 @@
     <Compile Include="clienteData.cs" />
     <Compile Include="conexionBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utilitariosData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\entityModels\entityModels.csproj">
