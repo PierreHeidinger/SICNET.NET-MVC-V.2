@@ -1,12 +1,15 @@
-﻿@model IEnumerable<entityModels.Cliente>
+﻿@using entityModels;
+@model IEnumerable<entityModels.Cliente>
 
 @{
     ViewBag.Title = "Clientes";
+
+    
 }
 
 
 
-
+<script src="~/Scripts/jquery-1.6.3.min.js"></script>
 
 
         <!-- Encabezado inicio-->
@@ -15,9 +18,12 @@
                 
               
                      <div class="col-md-12">
+
+                         <button type="button" onclick="callNuevo('_AgregarCliente', 'Clientes', 'divClienteNuevo')"  class="btn btn-primary btn-primary" id="btn_Nuevo" data-target="#modalNuevo" data-toggle="modal" >
+                                            Nuevo Cliente 
+                         </button>
                          
-                          @Html.ActionLink("AGREGAR CLIENTE", "Cliente_agregar",new { }, new { @class="btn btn-primary" })
-                         
+                       
                      </div>
 
                  @using (Html.BeginForm()) { 
@@ -31,17 +37,7 @@
                          <input class="form-control" placeholder="Cliente..." name="v_CLIENTE" value="@string.Empty" />
                      </div>
 
-                     <div class="col-md-2">
-                         <input class="form-control" placeholder="Codigo..." />
-                     </div>
-
-                     <div class="col-md-2">
-                         <input class="form-control" placeholder="Codigo..." />
-                     </div>
-
-                     <div class="col-md-2">
-                         <input class="form-control" placeholder="Codigo..." />
-                     </div>
+                     
 
                      <div class="btn-fill pull-right">    
                         <div class="col-md-2" style="vertical-align:top">                    
@@ -114,9 +110,18 @@
                                             @Html.DisplayFor(modelItem => item.fecha_registro)
                                         </td>
                                         <td style="text-align:center">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.codigo }) |
-                                            @Html.ActionLink("Detalle", "Cliente_detalle", new {  codigo =item.codigo  }) |
-                                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                                            <a onclick="callDetalle(@item.codigo)" data-toggle="modal" data-target="#modalDetalle">
+                                                <img src="~/img/detalle.png" width="18" title="Detalles" />
+                                            </a> |
+                                            <a onclick="callEdit(@item.codigo)" data-toggle="modal" data-target="#modalEditar">
+
+                                                <img src="~/img/editar.png" width="18" title="Editar" />
+                                            </a> |
+
+                                            <a onclick="callEliminar(@item.codigo)" data-toggle="modal" data-target="#modalEliminar">
+                                                <img src="~/img/file_delete.png" width="18" title="Eliminar" />
+                                            </a> 
                                         </td>
                                     </tr>
                                 }
@@ -133,6 +138,103 @@
 
     
 
+<!--AGREGAR-->
+
+    <div   class="modal fade modal-primary" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:80%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nuevo Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="divClienteNuevo">
+                        @*@Html.Action("callPartialView", new { v_Modulo=1 })*@
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+
+<!--Detalle-->
+
+<div class="modal fade modal-primary" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Informacion del Cliente</h4>
+            </div>
+            <div class="modal-body">
+                <div id="divClienteDetalle">
+                   
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Editar-->
+<div class="modal fade modal-primary" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edicion</h4>
+            </div>
+            <div class="modal-body">
+                <div id="divClienteEditar">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--Eliminar-->
+<div class="modal fade modal-primary" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edicion</h4>
+            </div>
+            <div class="modal-body">
+                <div id="divClienteEliminar">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    function callNuevo() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("_AgregarCliente", "Clientes")',
+            contentType: "application/json; charset=utf-8",
+
+            datatype: "json",
+            success: function (data) {
+
+                $('#divClienteNuevo').html(data);
+                $.validator.unobtrusive.parse($("#divClienteNuevo"));
+
+            },
+            error: function () {
+                alert("Error: Dynamic content load failed.");
+            }
+        });
+    }
 
 
 
@@ -140,22 +242,67 @@
 
 
 
+    function callDetalle(id) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("_DetalleCliente", "Clientes")',
+            contentType: "application/json; charset=utf-8",
+            data: { "id": id },
+            datatype: "json",
+            success: function (data) {
+
+                $('#divClienteDetalle').html(data);
+            
+            },
+            error: function () {
+                alert("Error: Dynamic content load failed.");
+            }
+        });
+      }
+
+    function callEdit(id) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("_EditarCliente", "Clientes")',
+            contentType: "application/json; charset=utf-8",
+            data: { "id": id },
+            datatype: "json",
+            success: function (data) {
+
+                $('#divClienteEditar').html(data);
+              
+            },
+            error: function () {
+                alert("Error: Dynamic content load failed.");
+            }
+        });
+    }
+    function callEliminar(id) {
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("_EliminarCliente", "Clientes")',
+            contentType: "application/json; charset=utf-8",
+            data: { "id": id },
+            datatype: "json",
+            success: function (data) {
+
+                $('#divClienteEliminar').html(data);
+
+            },
+            error: function () {
+                alert("Error: Dynamic content load failed.");
+            }
+        });
+    }
 
 
+    
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
 
 
 

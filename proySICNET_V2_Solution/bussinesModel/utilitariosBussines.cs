@@ -23,5 +23,24 @@ namespace bussinesModel
 
         #endregion
 
+
+        #region "PROVINCIAS"
+
+        public List<Provincia> FPub_ListaProvincia(int v_DEPARTAMENTO)
+        {
+            return obj_utilitarios.FPub_ListProvincias(v_DEPARTAMENTO);
+        }
+
+        #endregion
+
+        #region "DISTRITOS"
+
+        public List<Distrito> FPub_ListaDistritos(int v_PROVINCIA)
+        {
+            return obj_utilitarios.FPub_ListDistritos(v_PROVINCIA);
+        }
+
+        #endregion
+
     }
 }

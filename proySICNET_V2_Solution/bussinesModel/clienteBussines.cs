@@ -35,10 +35,15 @@ namespace bussinesModel
 
 
         //Detalle y Edicion del Cliente
-
         public Cliente FPub_DetalleCliente(string v_CODIGO)
         {
             return obj_cliente.FPub_DetalleCliente(v_CODIGO);
+        }
+
+        //Mantenimiento Cliente
+        public int FPub_MantenimientoCliente(string v_Ind,Cliente cliente)
+        {
+            return obj_cliente.FPub_ClienteMantenimiento(v_Ind,cliente);
         }
 
     }

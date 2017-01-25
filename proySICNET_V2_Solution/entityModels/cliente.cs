@@ -17,11 +17,14 @@ namespace entityModels
         [Display(Name = "Codigo Documento")]
         public string tipo_documento { get; set; }
         [Display(Name = "Nombres")]
+        [Required(ErrorMessage = "Ingrese el Nombre !")]
         public string nombres { get; set; }
         [Display(Name = "Apellido Pat.")]
         public string apellido_paterno { get; set; }
         [Display(Name = "Apellido Mat.")]
         public string apellido_materno { get; set; }
+        [Display(Name="Razon social")]
+        public string razon_social { get; set; }
         [Display(Name = "Fecha Nac.")]
         public DateTime fecha_nacimiento { get; set; }
         [Display(Name = "Fecha Reg.")]
@@ -37,6 +40,7 @@ namespace entityModels
         [Display(Name = "Tipo Doc.")]
         public string tipo_documento_descripcion { get; set; }
 
+       
 
         //Constructor vacio
         public Cliente()

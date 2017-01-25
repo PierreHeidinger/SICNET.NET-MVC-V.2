@@ -13,6 +13,5 @@ namespace entityModels
         public string Provincia_descripcion { get; set; }
         public int Id_Departamento { get; set; }
 
-        public List<Distrito> Distritos { get; set; }
     }
 }
