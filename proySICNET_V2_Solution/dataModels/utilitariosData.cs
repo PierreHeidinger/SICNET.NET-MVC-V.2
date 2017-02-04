@@ -32,13 +32,13 @@ namespace dataModels
 
             SqlCommand cmd = new SqlCommand("SELECT ID_DEPARTAMENTO,DEPARTAMENTO FROM TB_DEPARTAMENTO", cn.getCn);
 
-            
+            /*
             Departamento inicio = new Departamento();
             inicio.Id_departamento = 0;
             inicio.Departamento_descripcion = "--Departamento--";
 
             departamentos.Add(inicio);
-            
+            */        
 
 
             using (var read = cmd.ExecuteReader())

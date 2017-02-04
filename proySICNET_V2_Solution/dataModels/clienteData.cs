@@ -80,9 +80,9 @@ namespace dataModels
             {
                 while (read.Read())
                 {
-                    cliente = new Cliente(Convert.ToString(read["CODIGO"]), (string)read["DOCUMENTO"], (string)read["TIPO_DOCUMENTO"], (string)read["NOMBRES"], (string)read["APELLIDO_PATERNO"],
+                    cliente = new Cliente(read["CODIGO"].ToString(), (string)read["DOCUMENTO"], (string)read["NOMBRES"], (string)read["APELLIDO_PATERNO"],
                                                   (string)read["APELLIDO_MATERNO"], (DateTime)read["FECHA_NACIMIENTO"], (DateTime)read["FECHA_REGISTRO"],
-                                                   (int)read["DEPARTAMENTO"], (int)read["DISTRITO"], (int)read["PROVINCIA"], (string)read["DIRECCION"]);
+                                                    (string)read["DIRECCION"], (string)read["DEP_DESCRIPCION"], (string)read["PROV_DESCRIPCION"],(string)read["DIS_DESCRIPCION"] );
                 }
             }
 

@@ -10,19 +10,32 @@
     //Tipos de Documento
     var documentos = new List<SelectListItem>
     {
-        new SelectListItem { Text="--TIPO DOCUMENTO--" , Value = "0" },
         new SelectListItem { Text="DNI" , Value = "1" },
         new SelectListItem { Text="RUC" , Value = "2"}
     };
 }
 
+<link href="~/Content/toastr.css" rel="stylesheet" />
+<script src="~/Scripts/toastr.js"></script>
 <script src="~/Scripts/jquery-1.6.3.min.js"></script>
+<link href="~/Content/datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+<script src="~/Content/datepicker/js/bootstrap-datepicker.min.js"></script>
+
+
+<style>
+
+    input{
+        text-transform:uppercase;
+    }
+</style>
 
 <script type="text/javascript">
 
 
 
     $(document).ready(function () {
+
+
 
         $("#cbo_Departamentos").change(function () {
 
@@ -79,7 +92,88 @@
             return false;
         })
 
+
+
     });
+
+
+
+
+    function checkIt(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            status = "This field accepts numbers only.";
+            return false;
+        }
+        status = "";
+        return true;
+    }
+
+
+    /*
+    function validacion() {
+
+        var tipo_doc = document.getElementById('tipo_documento').value;
+        var documento = document.getElementById('documento').value;
+        var nombres = document.getElementById('nombres').value;
+        var apellido_p = document.getElementById('apellido_paterno').value;
+        var apellido_m = document.getElementById('apellido_materno').value;
+        var razon_social = document.getElementById('razon_social').value;
+
+        //alert(tipo_doc);
+        if(tipo_doc == 1){
+            if (documento.length == 8 && nombres != '' && apellido_p != '' && apellido_m != ''  ) {
+                document.getElementById('btn_Grabar').disabled = false;
+            } else {
+                document.getElementById('btn_Grabar').disabled = true;
+            }
+        }
+
+        if (tipo_doc == 2) {
+            if (documento.length == 11 && nombres != '' && apellido_p != '' && apellido_m != '') {
+                document.getElementById('btn_Grabar').disabled = false;
+            } else {
+                document.getElementById('btn_Grabar').disabled = true;
+            }
+        }
+
+    }
+    */
+
+
+    function infoDocumento() {
+
+        toastr.info('El documento debe tener 8 digitos si es una persona natural , de lo contrario deberia contar con 11 caracteres');
+        
+    }
+
+    function hideToastr() {
+        toastr.clear();
+    }
+    /*
+    function valDocumento() {
+
+        var documento = document.getElementById('documento').value;
+
+        if (documento.length == 8 || documento.length == 11) {
+            document.getElementById('val_documento').style.display = 'none';
+        } else {
+            document.getElementById('val_documento').style.display = 'block';
+        }
+    }
+    */
+
+</script>
+
+
+<script>
+
+    $('#datepicker').datepicker({
+        format: "dd/mm/yyyy",
+        language: "es"
+    });
+
 </script>
 
 
@@ -87,8 +181,27 @@
 
 
 
-
 <!-- Encabezado fin-->
+
+<div class="row">
+
+
+    <div class="col-md-12">
+
+
+        @Html.ActionLink("Clientes", "Clientes", new { }, new { @class = "btn btn-warning btn-warning",@style="width:180px" })
+
+
+    </div>
+    
+
+
+
+</div>
+
+
+
+
 
 
 
@@ -98,57 +211,75 @@
 
             <div class="card-body">
 
-                @using (Html.BeginForm())
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form" }))
                 {
                     @Html.AntiForgeryToken()
 
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+                    
 
 
                     <div class="row">
-
+                        <label> DOCUMENTOS</label>
+                        <hr />
                         <div class="col-md-4">
-                            <div class="form-group">
-                                @Html.DropDownListFor(model => model.tipo_documento, documentos, new { @class = "form-control" })
+                            <div class="form-group">                                
+                                @Html.DropDownListFor(model => model.tipo_documento, documentos, "--TIPO DOCUMENTO--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.tipo_documento, "", new { @class = "text-danger" })
+
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
-                                @Html.EditorFor(model => model.documento, new { htmlAttributes = new { @class = "form-control", placeHolder = "Documento..." } })
-                                @Html.ValidationMessageFor(model => model.documento, "", new { @class = "text-danger" })
+                            <div class="form-group">                                
+                                    @Html.EditorFor(model => model.documento, new { htmlAttributes = new { @class = "form-control", placeHolder = "Documento...", onfocus = "infoDocumento();", onblur = "hideToastr()" } })
+                                    @Html.ValidationMessageFor(model => model.documento, "", new { @class = "text-danger" })                                
                             </div>
+                        </div>
 
+                    </div>
+
+                    <div class="row">
+                        <label>DATOS PERSONALES</label>
+                        <hr />
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-group has-feedback">
+                                    @Html.EditorFor(model => model.nombres, new { htmlAttributes = new { @class = "form-control", placeHolder = "Nombres..." } })
+                                    <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                                    @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-group has-feedback">
+                                    @Html.EditorFor(model => model.apellido_paterno, new { htmlAttributes = new { @class = "form-control", placeHolder = "Apellido paterno..." } })
+                                    <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                                    @Html.ValidationMessageFor(model => model.apellido_paterno, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-group has-feedback">
+                                    @Html.EditorFor(model => model.apellido_materno, new { htmlAttributes = new { @class = "form-control", placeHolder = "Apellido materno..." } })
+                                    @Html.ValidationMessageFor(model => model.apellido_materno, "", new { @class = "text-danger" })
+                                    <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
 
                     <div class="row">
 
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="form-group">
-                                @Html.EditorFor(model => model.nombres, new { htmlAttributes = new { @class = "form-control", placeHolder = "Nombres..." } })
-                                @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                                @Html.EditorFor(model => model.apellido_paterno, new { htmlAttributes = new { @class = "form-control", placeHolder = "Apellido paterno..." } })
-                                @Html.ValidationMessageFor(model => model.apellido_paterno, "", new { @class = "text-danger" })
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                                @Html.EditorFor(model => model.apellido_paterno, new { htmlAttributes = new { @class = "form-control", placeHolder = "Apellido materno..." } })
-                                @Html.ValidationMessageFor(model => model.apellido_materno, "", new { @class = "text-danger" })
-
+                                @Html.EditorFor(model => model.razon_social, new { htmlAttributes = new { @class = "form-control", value="", placeHolder = "Razon Social..." } })
+                                @Html.ValidationMessageFor(model => model.razon_social, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -165,70 +296,66 @@
                             </div>
                         </div>
 
+
+
+                    </div>
+
+                    <div class="row">
+                        <label>VIVIENDA</label>
+                        <hr />
                         <div class="col-md-4">
                             <div class="form-group">
-                                @Html.EditorFor(model => model.fecha_registro, new { htmlAttributes = new { @class = "form-control", @readonly = false, @value = "", placeHolder = "Documento..." } })
-                                @Html.ValidationMessageFor(model => model.fecha_registro, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(model => model.departamento, departamentos, "--Departamento--", new { @class = "form-control", id = "cbo_Departamentos" })
+                                @Html.ValidationMessageFor(model => model.departamento, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                @Html.DropDownListFor(model => model.provincia,
+                                                            new SelectList(Enumerable.Empty<SelectListItem>(), "Id_Provincia", "Provincia_descripcion"), "--Provincia--",
+                                                            new { @class = "form-control", id = "cbo_Provincias" })
+                                @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                @Html.DropDownListFor(model => model.distrito,
+                                                            new SelectList(Enumerable.Empty<SelectListItem>(), "Id_Distrito", "Distrito_descripcion"), "--Distrito--",
+                                                            new { @class = "form-control", id = "cbo_Distritos" })
+                                @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
 
                             </div>
                         </div>
 
                     </div>
 
-                        <div class="row">
+                    <div class="row">
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    @Html.DropDownListFor(model => model.departamento, departamentos, new { @class = "form-control", id = "cbo_Departamentos" })
-                                    @Html.ValidationMessageFor(model => model.departamento, "", new { @class = "text-danger" })
+                        <div class="col-md-8">
+                            <div class="form-group">
 
-                                </div>
+                                @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control", value = "", placeHolder = "Direccion..." } })
+                                @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-
-                                    @Html.DropDownListFor(model => model.provincia,
-                                                            new SelectList(Enumerable.Empty<SelectListItem>(), "Id_Provincia", "Provincia_descripcion"), "--Provincia--",
-                                                            new { @class = "form-control", id = "cbo_Provincias" })
-                                    @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-
-                                    @Html.DropDownListFor(model => model.distrito,
-                                                            new SelectList(Enumerable.Empty<SelectListItem>(), "Id_Distrito", "Distrito_descripcion"), "--Distrito--",
-                                                            new { @class = "form-control", id = "cbo_Distritos" })
-                                    @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
-
-                                </div>
-                            </div>
-
                         </div>
 
-                                                <div class="row">
-
-                                                    <div class="col-md-8">
-                                                        <div class="form-group">
-
-                                                            @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control", placeHolder = "Direccion..." } })
-                                                            @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                    </div>
 
 
-                                                <input type="submit" value="GRABAR" class="btn btn-success" />
+                    <input type="submit" id="btn_Grabar" value="GRABAR" class="btn btn-success" />
 
                 }
+
+
 
             </div>
         </div>
     </div>
 </div>
-

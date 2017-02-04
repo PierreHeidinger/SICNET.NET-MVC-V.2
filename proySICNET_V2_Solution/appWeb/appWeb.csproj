@@ -377,6 +377,7 @@
     <Content Include="Content\datepicker\css\bootstrap-datepicker3.min.css.map" />
     <Content Include="Content\datepicker\css\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="Content\datepicker\css\bootstrap-datepicker3.standalone.min.css.map" />
+    <None Include="Properties\PublishProfiles\SicnetMVC_v2.pubxml" />
     <None Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="img\detalle.png" />
     <Content Include="img\editar.png" />
@@ -401,14 +402,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Clientes\Clientes.cshtml" />
-    <Content Include="Views\Clientes\Cliente_detalle.cshtml" />
-    <Content Include="Views\Clientes\_Cliente_agregar.cshtml" />
-    <Content Include="Views\Clientes\_partial.cshtml" />
-    <Content Include="Views\Clientes\AgregarCliente.cshtml" />
     <Content Include="Views\Clientes\_AgregarCliente.cshtml" />
     <Content Include="Views\Clientes\_DetalleCliente.cshtml" />
     <Content Include="Views\Clientes\_EditarCliente.cshtml" />
     <Content Include="Views\Clientes\_EliminarCliente.cshtml" />
+    <Content Include="Views\Clientes\AgregarCliente.cshtml" />
+    <Content Include="Views\Clientes\exporExcel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
